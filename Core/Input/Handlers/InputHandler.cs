@@ -4,9 +4,9 @@ using Microsoft.Xna.Framework.Input;
 using JumpBot.Core.Input.Enums;
 using JumpBot.Core.State;
 
-namespace JumpBot.Core.Input;
+namespace JumpBot.Core.Input.Handlers;
 
-public class InputHandler(StateManager stateManager)
+internal class InputHandler(StateManager stateManager)
 {
     private readonly KeyboardInputHandler keyboardInputHandler = new();
     private readonly GamePadInputHandler gamePadInputHandler = new();

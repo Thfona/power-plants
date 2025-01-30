@@ -2,7 +2,7 @@ using System.Linq;
 using Microsoft.Xna.Framework.Input;
 using JumpBot.Core.Input.Interfaces;
 
-namespace JumpBot.Core.Input;
+namespace JumpBot.Core.Input.Handlers;
 
 internal class KeyboardInputHandler : IInputActionHandler
 {

@@ -37,7 +37,7 @@ public class RenderManager(Game game, GraphicsDeviceManager graphicsDeviceManage
         graphicsDeviceManager.GraphicsDevice.SetRenderTarget(null);
         graphicsDeviceManager.GraphicsDevice.Clear(Color.Black);
 
-        spriteBatch.Begin();
+        spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp);
         spriteBatch.Draw(renderTarget, destinationRectangle, Color.White);
         spriteBatch.End();
     }

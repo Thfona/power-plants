@@ -1,6 +1,6 @@
 namespace JumpBot.Core.Input.Enums;
 
-public enum InputContext
+internal enum InputContext
 {
     Menu,
     Game,

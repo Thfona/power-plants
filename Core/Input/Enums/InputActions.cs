@@ -1,6 +1,6 @@
 namespace JumpBot.Core.Input.Enums;
 
-public enum InputActions
+internal enum InputActions
 {
     StartGame,
     ExitGame,

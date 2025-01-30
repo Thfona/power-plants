@@ -1,6 +1,6 @@
 namespace JumpBot.Core.Input.Enums;
 
-public enum InputBehaviors
+internal enum InputBehaviors
 {
     Press,
     Hold,

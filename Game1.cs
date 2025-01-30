@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using JumpBot.Core.Content;
 using JumpBot.Core.Input;
-using JumpBot.Core.Input.Enums;
 using JumpBot.Core.Render;
 using JumpBot.Core.State;
 
@@ -15,7 +14,7 @@ public class Game1 : Game
 
     private RenderManager renderManager;
     private StateManager stateManager;
-    private InputHandler inputHandler;
+    private InputManager inputManager;
     private ContentLoader contentLoader;
 
     private static readonly int gameWidth = 1920;
@@ -25,14 +24,13 @@ public class Game1 : Game
     {
         graphicsDeviceManager = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
-        IsMouseVisible = true;
     }
 
     protected override void Initialize()
     {
         renderManager = new(this, graphicsDeviceManager, gameWidth, gameHeight);
-        stateManager = new(renderManager);
-        inputHandler = new(stateManager);
+        stateManager = new(this, renderManager);
+        inputManager = new(this, stateManager);
 
         stateManager.Initialize();
 
@@ -49,16 +47,8 @@ public class Game1 : Game
 
     protected override void Update(GameTime gameTime)
     {
-        inputHandler.HandleInput(InputActions.StartGame, stateManager.SetToInGameContext);
-        inputHandler.HandleInput(InputActions.ExitGame, Exit);
-        inputHandler.HandleInput(InputActions.SetFullScreen, stateManager.ToggleFullScreen);
-
+        inputManager.Update();
         stateManager.Update(gameTime);
-
-        if (stateManager.IsInGame)
-        {
-            // TODO: Add your update logic here
-        }
 
         base.Update(gameTime);
     }

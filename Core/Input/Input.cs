@@ -4,7 +4,13 @@ using JumpBot.Core.Input.Enums;
 
 namespace JumpBot.Core.Input;
 
-public class Input(InputActions action, InputBehaviors behavior, InputContext context, Keys[] keys, List<Buttons> buttons)
+internal class Input(
+    InputActions action,
+    InputBehaviors behavior,
+    InputContext context,
+    Keys[] keys,
+    List<Buttons> buttons
+)
 {
     public InputActions Action
     {

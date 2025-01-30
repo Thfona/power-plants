@@ -1,6 +1,6 @@
 namespace JumpBot.Core.State.Enums;
 
-public enum StateContext
+internal enum StateContext
 {
     Menu,
     Game,
