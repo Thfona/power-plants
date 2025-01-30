@@ -9,6 +9,7 @@ public class InputHandler(StateManager stateManager)
 {
     private readonly KeyboardInputHandler keyboardInputHandler = new();
     private readonly GamePadInputHandler gamePadInputHandler = new();
+    private readonly List<InputActions> unreleasedActions = [];
     private readonly Dictionary<InputActions, InputBehaviors> inputActionsBehaviorMapping = new()
     {
         { InputActions.StartGame, InputBehaviors.Press },
@@ -18,11 +19,11 @@ public class InputHandler(StateManager stateManager)
 
     private void ReleaseAction(InputActions inputAction)
     {
-        bool isActionUnreleased = stateManager.UnreleasedActions.Contains(inputAction);
+        bool isActionUnreleased = unreleasedActions.Contains(inputAction);
 
         if (isActionUnreleased)
         {
-            stateManager.UnreleasedActions.Remove(inputAction);
+            unreleasedActions.Remove(inputAction);
         }
     }
 
@@ -34,11 +35,11 @@ public class InputHandler(StateManager stateManager)
             
             if (inputBehavior == InputBehaviors.Press)
             {
-                bool isActionUnreleased = stateManager.UnreleasedActions.Contains(inputAction);
+                bool isActionUnreleased = unreleasedActions.Contains(inputAction);
 
                 if (!isActionUnreleased)
                 {
-                    stateManager.UnreleasedActions.Add(inputAction);
+                    unreleasedActions.Add(inputAction);
                     handleInputLogic();
                 }
             }
