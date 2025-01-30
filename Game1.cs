@@ -12,6 +12,7 @@ public class Game1 : Game
 
     private RenderTargetManager renderTargetManager;
     private StateManager stateManager;
+    private InputHandler inputHandler;
 
     private static readonly int gameWidth = 1920;
     private static readonly int gameHeight = 1080;
@@ -30,6 +31,8 @@ public class Game1 : Game
     {
         renderTargetManager = new(this, graphicsDeviceManager, gameWidth, gameHeight);
         stateManager = new(renderTargetManager);
+        inputHandler = new(stateManager);
+
         stateManager.Initialize();
 
         base.Initialize();
@@ -45,8 +48,6 @@ public class Game1 : Game
 
     protected override void Update(GameTime gameTime)
     {
-        InputHandler inputHandler = new(stateManager);
-
         inputHandler.HandleInput(InputActions.StartGame, stateManager.StartGame);
         inputHandler.HandleInput(InputActions.ExitGame, Exit);
         inputHandler.HandleInput(InputActions.SetFullScreen, stateManager.SwapFullScreen);

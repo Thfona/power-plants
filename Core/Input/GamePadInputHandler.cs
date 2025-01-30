@@ -8,7 +8,6 @@ namespace JumpBot.Core.Input;
 
 internal class GamePadInputHandler : IInputActionHandler
 {
-    private GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
     private readonly Dictionary<InputActions, List<Buttons>> inputActionsMapping = new()
     {
         { InputActions.StartGame, [Buttons.A] },
@@ -18,6 +17,8 @@ internal class GamePadInputHandler : IInputActionHandler
 
     private List<Buttons> GetPressedButtons()
     {
+        GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
+
         List<Buttons> pressedButtons = [];
 
         foreach (Buttons button in Enum.GetValues(typeof(Buttons)))
