@@ -1,6 +1,8 @@
 using System.Linq;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Input;
+using JumpBot.Core.Input.Enums;
+using JumpBot.Core.Input.Interfaces;
 
 namespace JumpBot.Core.Input;
 

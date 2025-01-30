@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using JumpBot.Core.Input.Enums;
 using JumpBot.Core.Managers;
 
 namespace JumpBot.Core.Input;

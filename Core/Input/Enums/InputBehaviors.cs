@@ -1,4 +1,4 @@
-namespace JumpBot.Core.Input;
+namespace JumpBot.Core.Input.Enums;
 
 public enum InputBehaviors
 {

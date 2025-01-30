@@ -3,6 +3,8 @@ using System.Linq;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using JumpBot.Core.Input.Enums;
+using JumpBot.Core.Input.Interfaces;
 
 namespace JumpBot.Core.Input;
 
@@ -15,7 +17,7 @@ internal class GamePadInputHandler : IInputActionHandler
         { InputActions.SetFullScreen, [Buttons.Start] },
     };
 
-    private List<Buttons> GetPressedButtons()
+    private static List<Buttons> GetPressedButtons()
     {
         GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
 

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using JumpBot.Core.Input;
+using JumpBot.Core.Input.Enums;
 using JumpBot.Core.Managers;
 
 namespace JumpBot;
