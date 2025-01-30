@@ -12,7 +12,7 @@ public class RenderTargetManager(Game game, GraphicsDeviceManager graphicsDevice
     public void Activate()
     {
         graphicsDeviceManager.GraphicsDevice.SetRenderTarget(renderTarget);
-        graphicsDeviceManager.GraphicsDevice.Clear(Color.Green);
+        graphicsDeviceManager.GraphicsDevice.Clear(Color.CornflowerBlue);
     }
 
     public void Draw(SpriteBatch spriteBatch)
