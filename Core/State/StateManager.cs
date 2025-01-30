@@ -29,27 +29,24 @@ public class StateManager(RenderTargetManager renderTargetManager)
         renderTargetManager.SetFullScreen(_isFullScreen);
     }
 
-    public void SwapFullScreen()
+    public void ToggleFullScreen()
     {
         renderTargetManager.SetFullScreen(!_isFullScreen);
         _isFullScreen = !_isFullScreen;
     }
 
-    public void StartGame()
+    public void SetToInGameContext()
     {
         stateContext = StateContext.Game;
     }
 
-    public void EndGame()
+    public void SetToInMenuContext()
     {
         stateContext = StateContext.Menu;
     }
 
     public void Update(GameTime gameTime)
     {
-        if (IsInGame)
-        {
-            // TODO: Add in game logic
-        }
+        // TODO: Add update logic
     }
 }

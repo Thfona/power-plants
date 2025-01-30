@@ -50,9 +50,9 @@ public class Game1 : Game
 
     protected override void Update(GameTime gameTime)
     {
-        inputHandler.HandleInput(InputActions.StartGame, stateManager.StartGame);
+        inputHandler.HandleInput(InputActions.StartGame, stateManager.SetToInGameContext);
         inputHandler.HandleInput(InputActions.ExitGame, Exit);
-        inputHandler.HandleInput(InputActions.SetFullScreen, stateManager.SwapFullScreen);
+        inputHandler.HandleInput(InputActions.SetFullScreen, stateManager.ToggleFullScreen);
 
         stateManager.Update(gameTime);
 
@@ -80,7 +80,7 @@ public class Game1 : Game
             Vector2 exitGameTextSize = smallFont.MeasureString(exitGameMessage);
             spriteBatch.DrawString(smallFont, exitGameMessage, new Vector2((gameWidth / 2) - (exitGameTextSize.X / 2), 300), Color.White);
 
-            string fullScreenMessage = "Press [F] or (Start) to enable/disable fullscreen.";
+            string fullScreenMessage = "Press [F] or (Start) to toggle fullscreen.";
             Vector2 fullScreenTextSize = smallFont.MeasureString(fullScreenMessage);
             spriteBatch.DrawString(smallFont, fullScreenMessage, new Vector2((gameWidth / 2) - (fullScreenTextSize.X / 2), 400), Color.White);
         }

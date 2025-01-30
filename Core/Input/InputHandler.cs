@@ -29,7 +29,7 @@ public class InputHandler(StateManager stateManager)
 
     public void HandleInput(InputActions inputAction, Action handleInputLogic)
     {
-        Input input = inputs.Find(i => i.Action == inputAction);
+        Input input = inputs.Find((i) => i.Action == inputAction);
 
         if (input.Context == InputContext.Menu && !stateManager.IsInMenu)
         {
