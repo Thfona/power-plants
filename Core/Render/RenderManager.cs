@@ -4,10 +4,27 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace JumpBot.Core.Render;
 
-public class RenderTargetManager(Game game, GraphicsDeviceManager graphicsDeviceManager, int targetWidth, int targetHeight)
+public class RenderManager(Game game, GraphicsDeviceManager graphicsDeviceManager, int targetWidth, int targetHeight)
 {
     private readonly RenderTarget2D renderTarget = new(graphicsDeviceManager.GraphicsDevice, targetWidth, targetHeight);
     private Rectangle destinationRectangle;
+
+    private void SetDestinationRectangle()
+    {
+        Rectangle screenSize = graphicsDeviceManager.GraphicsDevice.PresentationParameters.Bounds;
+
+        float scaleX = (float)screenSize.Width / renderTarget.Width;
+        float scaleY = (float)screenSize.Height / renderTarget.Height;
+        float scale = Math.Min(scaleX, scaleY);
+
+        int newWidth = (int)(renderTarget.Width * scale);
+        int newHeight = (int)(renderTarget.Height * scale);
+
+        int posX = (screenSize.Width - newWidth) / 2;
+        int posY = (screenSize.Height - newHeight) / 2;
+
+        destinationRectangle = new(posX, posY, newWidth, newHeight);
+    }
 
     public void Activate()
     {
@@ -23,23 +40,6 @@ public class RenderTargetManager(Game game, GraphicsDeviceManager graphicsDevice
         spriteBatch.Begin();
         spriteBatch.Draw(renderTarget, destinationRectangle, Color.White);
         spriteBatch.End();
-    }
-
-    public void SetDestinationRectangle()
-    {
-        Rectangle screenSize = graphicsDeviceManager.GraphicsDevice.PresentationParameters.Bounds;
-
-        float scaleX = (float)screenSize.Width / renderTarget.Width;
-        float scaleY = (float)screenSize.Height / renderTarget.Height;
-        float scale = Math.Min(scaleX, scaleY);
-
-        int newWidth = (int)(renderTarget.Width * scale);
-        int newHeight = (int)(renderTarget.Height * scale);
-
-        int posX = (screenSize.Width - newWidth) / 2;
-        int posY = (screenSize.Height - newHeight) / 2;
-
-        destinationRectangle = new(posX, posY, newWidth, newHeight);
     }
 
     public void SetFullScreen(bool enable)

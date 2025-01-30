@@ -4,7 +4,7 @@ using JumpBot.Core.Render;
 
 namespace JumpBot.Core.State;
 
-public class StateManager(RenderTargetManager renderTargetManager)
+public class StateManager(RenderManager renderManager)
 {
     private bool _isFullScreen = false;
     private StateContext stateContext = StateContext.Menu;
@@ -26,12 +26,12 @@ public class StateManager(RenderTargetManager renderTargetManager)
 
     public void Initialize()
     {
-        renderTargetManager.SetFullScreen(_isFullScreen);
+        renderManager.SetFullScreen(_isFullScreen);
     }
 
     public void ToggleFullScreen()
     {
-        renderTargetManager.SetFullScreen(!_isFullScreen);
+        renderManager.SetFullScreen(!_isFullScreen);
         _isFullScreen = !_isFullScreen;
     }
 

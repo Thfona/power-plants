@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using JumpBot.Core.Content;
 using JumpBot.Core.Input;
 using JumpBot.Core.Input.Enums;
 using JumpBot.Core.Render;
@@ -12,15 +13,13 @@ public class Game1 : Game
     private readonly GraphicsDeviceManager graphicsDeviceManager;
     private SpriteBatch spriteBatch;
 
-    private RenderTargetManager renderTargetManager;
+    private RenderManager renderManager;
     private StateManager stateManager;
     private InputHandler inputHandler;
+    private ContentLoader contentLoader;
 
     private static readonly int gameWidth = 1920;
     private static readonly int gameHeight = 1080;
-
-    private SpriteFont bigFont;
-    private SpriteFont smallFont;
 
     public Game1()
     {
@@ -31,8 +30,8 @@ public class Game1 : Game
 
     protected override void Initialize()
     {
-        renderTargetManager = new(this, graphicsDeviceManager, gameWidth, gameHeight);
-        stateManager = new(renderTargetManager);
+        renderManager = new(this, graphicsDeviceManager, gameWidth, gameHeight);
+        stateManager = new(renderManager);
         inputHandler = new(stateManager);
 
         stateManager.Initialize();
@@ -43,9 +42,9 @@ public class Game1 : Game
     protected override void LoadContent()
     {
         spriteBatch = new SpriteBatch(GraphicsDevice);
+        contentLoader = new ContentLoader(Content);
 
-        bigFont = Content.Load<SpriteFont>("bigFont");
-        smallFont = Content.Load<SpriteFont>("smallFont");
+        contentLoader.LoadContent();
     }
 
     protected override void Update(GameTime gameTime)
@@ -66,28 +65,28 @@ public class Game1 : Game
 
     protected override void Draw(GameTime gameTime)
     {
-        renderTargetManager.Activate();
+        renderManager.Activate();
 
         spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp);
 
-        if (!stateManager.IsInGame)
+        if (stateManager.IsInMenu)
         {
             string startGameMessage = "Press [Enter] or (A) to begin.";
-            Vector2 startGameTextSize = bigFont.MeasureString(startGameMessage);
-            spriteBatch.DrawString(bigFont, startGameMessage, new Vector2((gameWidth / 2) - (startGameTextSize.X / 2), 200), Color.White);
+            Vector2 startGameTextSize = contentLoader.BigFont.MeasureString(startGameMessage);
+            spriteBatch.DrawString(contentLoader.BigFont, startGameMessage, new Vector2((gameWidth / 2) - (startGameTextSize.X / 2), 200), Color.White);
 
             string exitGameMessage = "Press [Esc] or (Back) to quit.";
-            Vector2 exitGameTextSize = smallFont.MeasureString(exitGameMessage);
-            spriteBatch.DrawString(smallFont, exitGameMessage, new Vector2((gameWidth / 2) - (exitGameTextSize.X / 2), 300), Color.White);
+            Vector2 exitGameTextSize = contentLoader.SmallFont.MeasureString(exitGameMessage);
+            spriteBatch.DrawString(contentLoader.SmallFont, exitGameMessage, new Vector2((gameWidth / 2) - (exitGameTextSize.X / 2), 300), Color.White);
 
             string fullScreenMessage = "Press [F] or (Start) to toggle fullscreen.";
-            Vector2 fullScreenTextSize = smallFont.MeasureString(fullScreenMessage);
-            spriteBatch.DrawString(smallFont, fullScreenMessage, new Vector2((gameWidth / 2) - (fullScreenTextSize.X / 2), 400), Color.White);
+            Vector2 fullScreenTextSize = contentLoader.SmallFont.MeasureString(fullScreenMessage);
+            spriteBatch.DrawString(contentLoader.SmallFont, fullScreenMessage, new Vector2((gameWidth / 2) - (fullScreenTextSize.X / 2), 400), Color.White);
         }
 
         spriteBatch.End();
 
-        renderTargetManager.Draw(spriteBatch);
+        renderManager.Draw(spriteBatch);
 
         base.Draw(gameTime);
     }
