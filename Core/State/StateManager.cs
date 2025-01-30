@@ -1,20 +1,27 @@
 using Microsoft.Xna.Framework;
+using JumpBot.Core.State.Enums;
+using JumpBot.Core.Render;
 
-namespace JumpBot.Core.Managers;
+namespace JumpBot.Core.State;
 
 public class StateManager(RenderTargetManager renderTargetManager)
 {
     private bool _isFullScreen = false;
-    private bool _isInGame = false;
+    private StateContext stateContext = StateContext.Menu;
 
     public bool IsFullScreen
     {
         get => _isFullScreen;
     }
 
+    public bool IsInMenu
+    {
+        get => stateContext == StateContext.Menu;
+    }
+
     public bool IsInGame
     {
-        get => _isInGame;
+        get => stateContext == StateContext.Game;
     }
 
     public void Initialize()
@@ -30,17 +37,17 @@ public class StateManager(RenderTargetManager renderTargetManager)
 
     public void StartGame()
     {
-        _isInGame = true;
+        stateContext = StateContext.Game;
     }
 
     public void EndGame()
     {
-        _isInGame = false;
+        stateContext = StateContext.Menu;
     }
 
     public void Update(GameTime gameTime)
     {
-        if (_isInGame)
+        if (IsInGame)
         {
             // TODO: Add in game logic
         }

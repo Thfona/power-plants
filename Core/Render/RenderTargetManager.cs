@@ -2,7 +2,7 @@ using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace JumpBot.Core.Managers;
+namespace JumpBot.Core.Render;
 
 public class RenderTargetManager(Game game, GraphicsDeviceManager graphicsDeviceManager, int targetWidth, int targetHeight)
 {

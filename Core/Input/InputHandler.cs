@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Microsoft.Xna.Framework.Input;
 using JumpBot.Core.Input.Enums;
-using JumpBot.Core.Managers;
+using JumpBot.Core.State;
 
 namespace JumpBot.Core.Input;
 
@@ -10,12 +11,11 @@ public class InputHandler(StateManager stateManager)
     private readonly KeyboardInputHandler keyboardInputHandler = new();
     private readonly GamePadInputHandler gamePadInputHandler = new();
     private readonly List<InputActions> unreleasedActions = [];
-    private readonly Dictionary<InputActions, InputBehaviors> inputActionsBehaviorMapping = new()
-    {
-        { InputActions.StartGame, InputBehaviors.Press },
-        { InputActions.ExitGame, InputBehaviors.Press },
-        { InputActions.SetFullScreen, InputBehaviors.Press },
-    };
+    private readonly List<Input> inputs = [
+        new Input(InputActions.StartGame, InputBehaviors.Press, InputContext.Menu, [Keys.Enter], [Buttons.A]),
+        new Input(InputActions.ExitGame, InputBehaviors.Press, InputContext.Global, [Keys.Escape], [Buttons.Back]),
+        new Input(InputActions.SetFullScreen, InputBehaviors.Press, InputContext.Menu, [Keys.F], [Buttons.Start]),
+    ];
 
     private void ReleaseAction(InputActions inputAction)
     {
@@ -29,11 +29,21 @@ public class InputHandler(StateManager stateManager)
 
     public void HandleInput(InputActions inputAction, Action handleInputLogic)
     {
-        if (keyboardInputHandler.IsExecutingAction(inputAction) || gamePadInputHandler.IsExecutingAction(inputAction))
+        Input input = inputs.Find(i => i.Action == inputAction);
+
+        if (input.Context == InputContext.Menu && !stateManager.IsInMenu)
         {
-            InputBehaviors inputBehavior = inputActionsBehaviorMapping[inputAction];
-            
-            if (inputBehavior == InputBehaviors.Press)
+            return;
+        }
+
+        if (input.Context == InputContext.Game && !stateManager.IsInGame)
+        {
+            return;
+        }
+
+        if (keyboardInputHandler.IsPressingInput(input) || gamePadInputHandler.IsPressingInput(input))
+        {
+            if (input.Behavior == InputBehaviors.Press)
             {
                 bool isActionUnreleased = unreleasedActions.Contains(inputAction);
 
