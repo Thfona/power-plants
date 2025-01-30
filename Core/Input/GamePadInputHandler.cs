@@ -31,7 +31,8 @@ internal class GamePadInputHandler : IInputActionHandler
         return pressedButtons;
     }
 
-    public bool IsExecutingAction(InputActions inputAction) {
+    public bool IsExecutingAction(InputActions inputAction)
+    {
         List<Buttons> inputActionButtons = inputActionsMapping[inputAction];
 
         List<Buttons> pressedButtons = GetPressedButtons();

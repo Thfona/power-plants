@@ -1,10 +1,14 @@
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using JumpBot.Core.Input;
+
 namespace JumpBot.Core.Managers;
 
 public class StateManager(RenderTargetManager renderTargetManager)
 {
-    private bool _isFullScreen = true;
+    private bool _isFullScreen = false;
     private bool _isInGame = false;
+    private readonly List<InputActions> _unreleasedActions = [];
 
     public bool IsFullScreen
     {
@@ -14,6 +18,11 @@ public class StateManager(RenderTargetManager renderTargetManager)
     public bool IsInGame
     {
         get => _isInGame;
+    }
+
+    public List<InputActions> UnreleasedActions
+    {
+        get => _unreleasedActions;
     }
 
     public void Initialize()

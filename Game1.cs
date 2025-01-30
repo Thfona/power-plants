@@ -45,7 +45,7 @@ public class Game1 : Game
 
     protected override void Update(GameTime gameTime)
     {
-        InputHandler inputHandler = new();
+        InputHandler inputHandler = new(stateManager);
 
         inputHandler.HandleInput(InputActions.StartGame, stateManager.StartGame);
         inputHandler.HandleInput(InputActions.ExitGame, Exit);

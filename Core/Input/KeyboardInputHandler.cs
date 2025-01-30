@@ -14,7 +14,8 @@ internal class KeyboardInputHandler : IInputActionHandler
         { InputActions.SetFullScreen, [Keys.F] },
     };
 
-    public bool IsExecutingAction(InputActions inputAction) {
+    public bool IsExecutingAction(InputActions inputAction)
+    {
         Keys[] inputActionKeys = inputActionsMapping[inputAction];
 
         Keys[] pressedKeys = keyboardState.GetPressedKeys();
