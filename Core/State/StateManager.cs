@@ -26,7 +26,7 @@ public class StateManager(Game game, RenderManager renderManager)
 
     public void Initialize()
     {
-        game.IsMouseVisible = true;
+        game.IsMouseVisible = false;
         renderManager.SetFullScreen(_isFullScreen);
     }
 
