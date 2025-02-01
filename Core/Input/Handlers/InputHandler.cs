@@ -14,7 +14,7 @@ internal class InputHandler(StateManager stateManager)
     private readonly List<Input> inputs = [
         new Input(InputActions.StartGame, InputBehaviors.Press, InputContext.Menu, [Keys.Enter], [Buttons.A]),
         new Input(InputActions.ExitGame, InputBehaviors.Press, InputContext.Global, [Keys.Escape], [Buttons.Back]),
-        new Input(InputActions.SetFullScreen, InputBehaviors.Press, InputContext.Menu, [Keys.F], [Buttons.Start]),
+        new Input(InputActions.SetFullScreen, InputBehaviors.Press, InputContext.Menu, [Keys.F], [Buttons.Y]),
     ];
 
     private void ReleaseAction(InputActions inputAction)
