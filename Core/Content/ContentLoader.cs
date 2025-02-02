@@ -11,6 +11,7 @@ public class ContentLoader(ContentManager contentManager)
     private SpriteFont _smallFont;
     private SoundEffect _startSfx;
     private SoundEffect _pickSfx;
+    private SoundEffect _placeSfx;
     private SoundEffect _failSfx;
     private SoundEffect _powerPlantsThemeSong;
     private Texture2D _topPanel;
@@ -49,6 +50,11 @@ public class ContentLoader(ContentManager contentManager)
     public SoundEffect PickSfx
     {
         get => _pickSfx;
+    }
+
+    public SoundEffect PlaceSfx
+    {
+        get => _placeSfx;
     }
 
     public SoundEffect FailSfx
@@ -103,6 +109,7 @@ public class ContentLoader(ContentManager contentManager)
 
         _startSfx = contentManager.Load<SoundEffect>("audio/start");
         _pickSfx = contentManager.Load<SoundEffect>("audio/pick");
+        _placeSfx = contentManager.Load<SoundEffect>("audio/place");
         _failSfx = contentManager.Load<SoundEffect>("audio/fail");
 
         _powerPlantsThemeSong = contentManager.Load<SoundEffect>("audio/powerPlants");

@@ -41,7 +41,7 @@ public class RenderManager(Game game, GraphicsDeviceManager graphicsDeviceManage
     public void Load()
     {
         graphicsDeviceManager.GraphicsDevice.SetRenderTarget(renderTarget);
-        graphicsDeviceManager.GraphicsDevice.Clear(Color.RoyalBlue);
+        graphicsDeviceManager.GraphicsDevice.Clear(Color.CornflowerBlue);
     }
 
     public void Draw(SpriteBatch spriteBatch)

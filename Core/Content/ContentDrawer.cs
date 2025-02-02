@@ -33,16 +33,13 @@ public class ContentDrawer(SpriteBatch spriteBatch, StateManager stateManager, C
         spriteBatch.DrawString(spriteFont, text, position, color);
     }
 
-    private void DrawGrid(List<GridItem> grid)
+    private void DrawGrid(List<GridItem> grid, Color color)
     {
-        grid.ForEach((item) => spriteBatch.Draw(item.PowerPlant?.Texture ?? item.Texture, item.Position, Color.White));
+        grid.ForEach((item) => spriteBatch.Draw(item.PowerPlant?.Texture ?? item.Texture, item.Position, color));
     }
 
     private void DrawMenu()
     {
-        // Grid
-        DrawGrid(stateManager.MenuGrid);
-
         // Title
         string title = "Power Plants";
         Vector2 titleTextSize = contentLoader.BigFont.MeasureString(title);
@@ -90,7 +87,7 @@ public class ContentDrawer(SpriteBatch spriteBatch, StateManager stateManager, C
         });
 
         // Grid
-        DrawGrid(stateManager.GameGrid);
+        DrawGrid(stateManager.GameGrid, Color.White);
 
         // Cursor
         if (stateManager.SelectedPowerPlant != null)
@@ -109,6 +106,9 @@ public class ContentDrawer(SpriteBatch spriteBatch, StateManager stateManager, C
     public void Draw()
     {
         BeginSpriteBatch();
+
+        // Background Grid
+        DrawGrid(stateManager.BackgroundGrid, new Color(Color.Green, 0.3f));
 
         if (stateManager.IsInMenu)
         {

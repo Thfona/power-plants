@@ -25,6 +25,12 @@
 /processorParam:Quality=Best
 /build:audio/pick.wav
 
+#begin audio/place.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audio/place.wav
+
 #begin audio/powerPlants.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor

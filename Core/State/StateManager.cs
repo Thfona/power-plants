@@ -24,13 +24,13 @@ public class StateManager(Game game, RenderManager renderManager)
     private static readonly int sidePanelSizeX = 216;
     private static readonly int sidePanelSizeY = 110;
     private static readonly int _gridTileSize = 32;
-    private static readonly int menuGridWidth = 25;
-    private static readonly int menuGridHeight = 19;
+    private static readonly int backgroundGridWidth = 25;
+    private static readonly int backgroundGridHeight = 19;
     private static readonly int gameGridWidth = 15;
     private static readonly int gameGridHeight = 15;
     private static readonly int gameGridSizeWidth = gameGridWidth * _gridTileSize;
     private static readonly int _gameGridSizeHeight = gameGridHeight * _gridTileSize;
-    private List<GridItem> _menuGrid;
+    private List<GridItem> _backgroundGrid;
     private List<GridItem> _gameGrid;
     private List<PowerPlant> _powerPlantList;
     private PowerPlant _selectedPowerPlant;
@@ -45,9 +45,9 @@ public class StateManager(Game game, RenderManager renderManager)
         get => _gameGridSizeHeight;
     }
 
-    public List<GridItem> MenuGrid
+    public List<GridItem> BackgroundGrid
     {
-        get => _menuGrid;
+        get => _backgroundGrid;
     }
 
     public List<GridItem> GameGrid
@@ -112,7 +112,7 @@ public class StateManager(Game game, RenderManager renderManager)
         return grid;
     }
 
-    private void BuildMenuGrid()
+    private void BuildBackgroundGrid()
     {
         Vector2 offset = new(0, 0);
 
@@ -123,7 +123,7 @@ public class StateManager(Game game, RenderManager renderManager)
             contentLoader.NuclearPlant,
         ];
 
-        _menuGrid = BuildGrid(menuGridWidth, menuGridHeight, offset, textureOptions);
+        _backgroundGrid = BuildGrid(backgroundGridWidth, backgroundGridHeight, offset, textureOptions);
     }
 
     private void BuildGameGrid()
@@ -165,7 +165,7 @@ public class StateManager(Game game, RenderManager renderManager)
             new(4, "Nuclear", 30, 5000, contentLoader.NuclearPlant, new Rectangle(new Point(sidePanelStartX, 452), new Point(sidePanelSizeX, sidePanelSizeY))),
         ];
 
-        BuildMenuGrid();
+        BuildBackgroundGrid();
         BuildGameGrid();
 
         AudioPlayer.PlayMusic(this.contentLoader.PowerPlantsThemeSong, true);
@@ -235,7 +235,7 @@ public class StateManager(Game game, RenderManager renderManager)
 
                     _selectedPowerPlant = null;
 
-                    AudioPlayer.PlaySoundEffect(contentLoader.PickSfx);
+                    AudioPlayer.PlaySoundEffect(contentLoader.PlaceSfx);
                 } else {
                     AudioPlayer.PlaySoundEffect(contentLoader.FailSfx);
                 }
