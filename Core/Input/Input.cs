@@ -8,6 +8,7 @@ internal class Input(
     InputActions action,
     InputBehaviors behavior,
     InputContext context,
+    List<MouseButtons> mouseButtons,
     Keys[] keys,
     List<Buttons> buttons
 )
@@ -25,6 +26,11 @@ internal class Input(
     public InputContext Context
     {
         get => context;
+    }
+
+    public List<MouseButtons> MouseButtons
+    {
+        get => mouseButtons;
     }
 
     public Keys[] Keys

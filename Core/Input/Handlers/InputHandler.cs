@@ -8,13 +8,14 @@ namespace PowerPlant.Core.Input.Handlers;
 
 internal class InputHandler(StateManager stateManager)
 {
+    private readonly MouseInputHandler mouseInputHandler = new();
     private readonly KeyboardInputHandler keyboardInputHandler = new();
     private readonly GamePadInputHandler gamePadInputHandler = new();
     private readonly List<InputActions> unreleasedActions = [];
     private readonly List<Input> inputs = [
-        new Input(InputActions.StartGame, InputBehaviors.Press, InputContext.Menu, [Keys.Enter], []),
-        new Input(InputActions.ExitGame, InputBehaviors.Press, InputContext.Global, [Keys.Escape], []),
-        new Input(InputActions.SetFullScreen, InputBehaviors.Press, InputContext.Global, [Keys.F], []),
+        new Input(InputActions.StartGame, InputBehaviors.Press, InputContext.Menu, [], [Keys.Enter], []),
+        new Input(InputActions.ExitGame, InputBehaviors.Press, InputContext.Global, [], [Keys.Escape], []),
+        new Input(InputActions.SetFullScreen, InputBehaviors.Press, InputContext.Global, [], [Keys.F], []),
     ];
 
     private void ReleaseAction(InputActions inputAction)
@@ -41,7 +42,11 @@ internal class InputHandler(StateManager stateManager)
             return;
         }
 
-        if (keyboardInputHandler.IsPressingInput(input) || gamePadInputHandler.IsPressingInput(input))
+        if (
+            keyboardInputHandler.IsPressingInput(input) ||
+            mouseInputHandler.IsPressingInput(input) ||
+            gamePadInputHandler.IsPressingInput(input)
+        )
         {
             if (input.Behavior == InputBehaviors.Press)
             {
