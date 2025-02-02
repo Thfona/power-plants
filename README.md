@@ -11,4 +11,4 @@ Tools used: MonoGame, Aseprite, LMMS, SFXR.
 
 Assets used: RasterForgeRegular font.
 
-All other assets made by me during the jam period.
+All other assets made by me during the jam period and are CC0.
