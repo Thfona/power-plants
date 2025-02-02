@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Media;
 
 namespace PowerPlant.Core.Content;
 
@@ -13,7 +12,8 @@ public class ContentLoader(ContentManager contentManager)
     private SoundEffect _startSfx;
     private SoundEffect _pickSfx;
     private SoundEffect _failSfx;
-    private Song _powerPlantThemeSong;
+    private SoundEffect _powerPlantThemeSong;
+    private Texture2D _solarPanel;
     private Texture2D grass1;
     private Texture2D grass2;
     private Texture2D grass3;
@@ -51,9 +51,14 @@ public class ContentLoader(ContentManager contentManager)
         get => _failSfx;
     }
 
-    public Song PowerPlantThemeSong
+    public SoundEffect PowerPlantThemeSong
     {
         get => _powerPlantThemeSong;
+    }
+
+    public Texture2D SolarPanel
+    {
+        get => _solarPanel;
     }
 
     public List<Texture2D> Grasses
@@ -70,8 +75,9 @@ public class ContentLoader(ContentManager contentManager)
         _pickSfx = contentManager.Load<SoundEffect>("audio/pick");
         _failSfx = contentManager.Load<SoundEffect>("audio/fail");
 
-        _powerPlantThemeSong = contentManager.Load<Song>("audio/powerplant");
+        _powerPlantThemeSong = contentManager.Load<SoundEffect>("audio/powerplant");
 
+        _solarPanel = contentManager.Load<Texture2D>("textures/solarPanel");
         grass1 = contentManager.Load<Texture2D>("textures/grass1");
         grass2 = contentManager.Load<Texture2D>("textures/grass2");
         grass3 = contentManager.Load<Texture2D>("textures/grass3");

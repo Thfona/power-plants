@@ -46,6 +46,7 @@ public class Game1 : Game
 
         contentLoader.LoadContent();
         contentDrawer.Load();
+        stateManager.PrepareContent(contentLoader);
     }
 
     protected override void Update(GameTime gameTime)

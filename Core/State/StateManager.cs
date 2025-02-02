@@ -1,14 +1,16 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using PowerPlant.Core.State.Enums;
+using PowerPlant.Core.Content;
 using PowerPlant.Core.Render;
+using PowerPlant.Core.State.Enums;
 
 namespace PowerPlant.Core.State;
 
 public class StateManager(Game game, RenderManager renderManager)
 {
-    private bool _isFullScreen = false;
+    private ContentLoader contentLoader;
     private StateContext stateContext = StateContext.Menu;
+    private bool _isFullScreen = false;
 
     public bool IsFullScreen
     {
@@ -36,6 +38,12 @@ public class StateManager(Game game, RenderManager renderManager)
         // TODO: Add update logic
     }
 
+    public void PrepareContent(ContentLoader contentLoader)
+    {
+        this.contentLoader = contentLoader;
+        AudioPlayer.PlayMusic(this.contentLoader.PowerPlantThemeSong, true);
+    }
+
     public void ToggleFullScreen()
     {
         renderManager.SetFullScreen(!_isFullScreen);
@@ -45,6 +53,7 @@ public class StateManager(Game game, RenderManager renderManager)
     public void StartGame()
     {
         stateContext = StateContext.Game;
+        AudioPlayer.PlaySoundEffect(contentLoader.StartSfx);
     }
 
     public void EndGame()
