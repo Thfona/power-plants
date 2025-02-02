@@ -1,12 +1,13 @@
 using System.Linq;
 using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using PowerPlants.Core.Input.Enums;
 using PowerPlants.Core.Input.Interfaces;
 
 namespace PowerPlants.Core.Input.Handlers;
 
-internal class MouseInputHandler : IInputActionHandler
+internal class MouseInputHandler(Game game) : IInputActionHandler
 {
     private static bool IsPressed(ButtonState buttonState) {
         return buttonState == ButtonState.Pressed;
@@ -33,6 +34,6 @@ internal class MouseInputHandler : IInputActionHandler
             pressedMouseButtons.Add(MouseButtons.RightButton);
         }
 
-        return pressedMouseButtons.Intersect(input.MouseButtons).Any();
+        return pressedMouseButtons.Intersect(input.MouseButtons).Any() && game.IsActive;
     }
 }

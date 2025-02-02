@@ -6,5 +6,4 @@ internal enum InputActions
     ExitGame,
     SetFullScreen,
     LeftClick,
-    RightClick,
 }

@@ -35,7 +35,7 @@ public class ContentDrawer(SpriteBatch spriteBatch, StateManager stateManager, C
 
     private void DrawGrid(List<GridItem> grid)
     {
-        grid.ForEach((item) => spriteBatch.Draw(item.Texture, item.Position, Color.White));
+        grid.ForEach((item) => spriteBatch.Draw(item.PowerPlant?.Texture ?? item.Texture, item.Position, Color.White));
     }
 
     private void DrawMenu()
@@ -82,7 +82,10 @@ public class ContentDrawer(SpriteBatch spriteBatch, StateManager stateManager, C
         spriteBatch.DrawString(contentLoader.SmallFont, energyOutputText, new Vector2(RenderManager.GameWidth - energyOutputTextSize.X - 48, 28), Color.White);
 
         // Side panel content
-        // TODO
+        stateManager.PowerPlantList.ForEach((plant) => {
+            spriteBatch.DrawString(contentLoader.SmallFont, plant.Name, new Vector2(50, plant.Id * 115), Color.White);
+            spriteBatch.DrawString(contentLoader.SmallFont, "$" + plant.Cost, new Vector2(50, (plant.Id * 115) + 50), Color.White);
+        });
 
         // Grid
         DrawGrid(stateManager.GameGrid);

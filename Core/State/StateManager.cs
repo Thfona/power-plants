@@ -15,11 +15,14 @@ public class StateManager(Game game, RenderManager renderManager)
     private ContentLoader contentLoader;
     private StateContext stateContext = StateContext.Menu;
     private bool _isFullScreen = false;
-    private static readonly int energyGenerationInterval = 5;
+    private static readonly int energyGenerationInterval = 3;
     private double energyGenerationTimer = energyGenerationInterval;
     private double _energyOutput = 0;
     private static readonly int moneyMultiplier = 5;
     private double _money = 100;
+    private static readonly int sidePanelStartX = 36;
+    private static readonly int sidePanelSizeX = 216;
+    private static readonly int sidePanelSizeY = 110;
     private static readonly int _gridTileSize = 32;
     private static readonly int menuGridWidth = 25;
     private static readonly int menuGridHeight = 19;
@@ -29,6 +32,8 @@ public class StateManager(Game game, RenderManager renderManager)
     private static readonly int _gameGridSizeHeight = gameGridHeight * _gridTileSize;
     private List<GridItem> _menuGrid;
     private List<GridItem> _gameGrid;
+    private List<PowerPlant> _powerPlantList;
+    private PowerPlant _selectedPowerPlant;
 
     public static int GridTileSize
     {
@@ -49,6 +54,16 @@ public class StateManager(Game game, RenderManager renderManager)
     {
         get => _gameGrid;
         set => _gameGrid = value;
+    }
+
+    public List<PowerPlant> PowerPlantList
+    {
+        get => _powerPlantList;
+    }
+
+    public PowerPlant SelectedPowerPlant
+    {
+        get => _selectedPowerPlant;
     }
 
     public bool IsInMenu
@@ -103,6 +118,7 @@ public class StateManager(Game game, RenderManager renderManager)
 
         List<Texture2D> textureOptions = [
             contentLoader.SolarPlant,
+            contentLoader.WindPlant,
             contentLoader.NaturalGasPlant,
             contentLoader.NuclearPlant,
         ];
@@ -142,6 +158,13 @@ public class StateManager(Game game, RenderManager renderManager)
     {
         this.contentLoader = contentLoader;
 
+        _powerPlantList = [
+            new(1, "Solar", 5, 100, contentLoader.SolarPlant, new Rectangle(new Point(sidePanelStartX, 90), new Point(sidePanelSizeX, sidePanelSizeY))),
+            new(2, "Wind", 10, 1000, contentLoader.WindPlant, new Rectangle(new Point(sidePanelStartX, 212), new Point(sidePanelSizeX, sidePanelSizeY))),
+            new(3, "Nat. Gas", 15, 3000, contentLoader.NaturalGasPlant, new Rectangle(new Point(sidePanelStartX, 332), new Point(sidePanelSizeX, sidePanelSizeY))),
+            new(4, "Nuclear", 30, 5000, contentLoader.NuclearPlant, new Rectangle(new Point(sidePanelStartX, 452), new Point(sidePanelSizeX, sidePanelSizeY))),
+        ];
+
         BuildMenuGrid();
         BuildGameGrid();
 
@@ -170,5 +193,53 @@ public class StateManager(Game game, RenderManager renderManager)
         MouseState mouseState = Mouse.GetState();
 
         return mouseState.Position.ToVector2();
+    }
+
+    public void HandleLeftMouseClick()
+    {
+        Vector2 mousePosition = GetMousePosition();
+        
+        // Side panel
+        _powerPlantList.ForEach((powerPlant) => {
+            bool hasClickedSidePanelItem = powerPlant.Rectangle.Contains(mousePosition);
+
+            if (hasClickedSidePanelItem)
+            {
+                if (powerPlant.Cost <= _money && _selectedPowerPlant == null)
+                {
+                    _selectedPowerPlant = powerPlant;
+                    _money -= powerPlant.Cost;
+
+                    AudioPlayer.PlaySoundEffect(contentLoader.PickSfx);
+                } else {
+                    AudioPlayer.PlaySoundEffect(contentLoader.FailSfx);
+                }
+            }
+        });
+
+        // Game grid
+        _gameGrid.ForEach((item) => {
+            bool hasClickedGameGridItem = item.Rectangle.Contains(mousePosition);
+
+            if (hasClickedGameGridItem)
+            {
+                if (_selectedPowerPlant != null)
+                {
+                    if (item.PowerPlant != null)
+                    {
+                        _energyOutput -= item.PowerPlant.EnergyOutput;
+                    }
+                    
+                    item.PowerPlant = _selectedPowerPlant;
+                    _energyOutput += _selectedPowerPlant.EnergyOutput;
+
+                    _selectedPowerPlant = null;
+
+                    AudioPlayer.PlaySoundEffect(contentLoader.PickSfx);
+                } else {
+                    AudioPlayer.PlaySoundEffect(contentLoader.FailSfx);
+                }
+            }
+        });
     }
 }

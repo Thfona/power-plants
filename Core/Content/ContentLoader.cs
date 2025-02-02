@@ -78,7 +78,7 @@ public class ContentLoader(ContentManager contentManager)
 
     public Texture2D WindPlant
     {
-        get => _solarPlant;
+        get => _windPlant;
     }
 
     public Texture2D NaturalGasPlant
