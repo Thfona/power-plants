@@ -13,7 +13,11 @@ public class ContentLoader(ContentManager contentManager)
     private SoundEffect _pickSfx;
     private SoundEffect _failSfx;
     private SoundEffect _powerPlantThemeSong;
-    private Texture2D _solarPanel;
+    private Texture2D _topPanel;
+    private Texture2D _sidePanel;
+    private Texture2D _solarPlant;
+    private Texture2D _naturalGasPlant;
+    private Texture2D _nuclearPlant;
     private Texture2D grass1;
     private Texture2D grass2;
     private Texture2D grass3;
@@ -56,9 +60,29 @@ public class ContentLoader(ContentManager contentManager)
         get => _powerPlantThemeSong;
     }
 
-    public Texture2D SolarPanel
+    public Texture2D TopPanel
     {
-        get => _solarPanel;
+        get => _topPanel;
+    }
+
+    public Texture2D SidePanel
+    {
+        get => _sidePanel;
+    }
+
+    public Texture2D SolarPlant
+    {
+        get => _solarPlant;
+    }
+
+    public Texture2D NaturalGasPlant
+    {
+        get => _naturalGasPlant;
+    }
+
+    public Texture2D NuclearPlant
+    {
+        get => _nuclearPlant;
     }
 
     public List<Texture2D> Grasses
@@ -77,7 +101,11 @@ public class ContentLoader(ContentManager contentManager)
 
         _powerPlantThemeSong = contentManager.Load<SoundEffect>("audio/powerplant");
 
-        _solarPanel = contentManager.Load<Texture2D>("textures/solarPanel");
+        _topPanel = contentManager.Load<Texture2D>("textures/topPanel");
+        _sidePanel = contentManager.Load<Texture2D>("textures/sidePanel");
+        _solarPlant = contentManager.Load<Texture2D>("textures/solarPlant");
+        _naturalGasPlant = contentManager.Load<Texture2D>("textures/naturalGasPlant");
+        _nuclearPlant = contentManager.Load<Texture2D>("textures/nuclearPlant");
         grass1 = contentManager.Load<Texture2D>("textures/grass1");
         grass2 = contentManager.Load<Texture2D>("textures/grass2");
         grass3 = contentManager.Load<Texture2D>("textures/grass3");

@@ -16,8 +16,32 @@ public class ContentDrawer(
 {
     private static readonly Random random = new();
     private static readonly int gridTileSize = 32;
+    private static readonly int menuGridWidth = 25;
+    private static readonly int menuGridHeight = 19;
+    private static readonly int gameGridWidth = 15;
+    private static readonly int gameGridHeight = 15;
+    private static readonly int gameGridSizeWidth = gameGridWidth * gridTileSize;
+    private static readonly int gameGridSizeHeight = gameGridHeight * gridTileSize;
     private List<GridItem> menuGrid;
     private List<GridItem> gameGrid;
+
+    private void DrawStringWithOutline(SpriteFont spriteFont, string text, Vector2 position, Color color)
+    {
+        int firstOffset = 2;
+        int secondOffset = 4;
+
+        spriteBatch.DrawString(spriteFont, text, new Vector2(position.X - firstOffset, position.Y - firstOffset), Color.Black);
+        spriteBatch.DrawString(spriteFont, text, new Vector2(position.X + firstOffset, position.Y + firstOffset), Color.Black);
+        spriteBatch.DrawString(spriteFont, text, new Vector2(position.X + firstOffset, position.Y - firstOffset), Color.Black);
+        spriteBatch.DrawString(spriteFont, text, new Vector2(position.X - firstOffset, position.Y + firstOffset), Color.Black);
+
+        spriteBatch.DrawString(spriteFont, text, new Vector2(position.X - secondOffset, position.Y + secondOffset), Color.Black);
+        spriteBatch.DrawString(spriteFont, text, new Vector2(position.X - secondOffset, position.Y + secondOffset), Color.Black);
+        spriteBatch.DrawString(spriteFont, text, new Vector2(position.X - secondOffset, position.Y + secondOffset), Color.Black);
+        spriteBatch.DrawString(spriteFont, text, new Vector2(position.X - secondOffset, position.Y + secondOffset), Color.Black);
+
+        spriteBatch.DrawString(spriteFont, text, position, color);
+    }
 
     private static List<GridItem> BuildGrid(int gridWidth, int gridHeight, Vector2 offset, List<Texture2D> textureOptions)
     {
@@ -47,12 +71,15 @@ public class ContentDrawer(
 
     private void BuildMenuGrid()
     {
-        int gridWidth = 25;
-        int gridHeight = 19;
-
         Vector2 offset = new(0, 0);
 
-        menuGrid = BuildGrid(gridWidth, gridHeight, offset, contentLoader.Grasses);
+        List<Texture2D> textureOptions = [
+            contentLoader.SolarPlant,
+            contentLoader.NaturalGasPlant,
+            contentLoader.NuclearPlant,
+        ];
+
+        menuGrid = BuildGrid(menuGridWidth, menuGridHeight, offset, textureOptions);
     }
 
     private void DrawMenu()
@@ -61,36 +88,33 @@ public class ContentDrawer(
 
         string title = "Power Plant";
         Vector2 titleTextSize = contentLoader.BigFont.MeasureString(title);
-        spriteBatch.DrawString(contentLoader.BigFont, title, new Vector2((gameWidth / 2) - (titleTextSize.X / 2), 150), Color.White);
+        DrawStringWithOutline(contentLoader.BigFont, title, new Vector2((gameWidth / 2) - (titleTextSize.X / 2), 150), Color.White);
 
         string startGameMessage = "Press [Enter] to play";
         Vector2 startGameTextSize = contentLoader.SmallFont.MeasureString(startGameMessage);
-        spriteBatch.DrawString(contentLoader.SmallFont, startGameMessage, new Vector2((gameWidth / 2) - (startGameTextSize.X / 2), 350), Color.White);
+        DrawStringWithOutline(contentLoader.SmallFont, startGameMessage, new Vector2((gameWidth / 2) - (startGameTextSize.X / 2), 350), Color.White);
 
         string fullScreenMessage = "Press [F] to toggle fullscreen";
         Vector2 fullScreenTextSize = contentLoader.SmallFont.MeasureString(fullScreenMessage);
-        spriteBatch.DrawString(contentLoader.SmallFont, fullScreenMessage, new Vector2((gameWidth / 2) - (fullScreenTextSize.X / 2), 400), Color.White);
+        DrawStringWithOutline(contentLoader.SmallFont, fullScreenMessage, new Vector2((gameWidth / 2) - (fullScreenTextSize.X / 2), 400), Color.White);
 
         string exitGameMessage = "Press [Esc] to quit";
         Vector2 exitGameTextSize = contentLoader.SmallFont.MeasureString(exitGameMessage);
-        spriteBatch.DrawString(contentLoader.SmallFont, exitGameMessage, new Vector2((gameWidth / 2) - (exitGameTextSize.X / 2), 450), Color.White);
+        DrawStringWithOutline(contentLoader.SmallFont, exitGameMessage, new Vector2((gameWidth / 2) - (exitGameTextSize.X / 2), 450), Color.White);
     }
 
     private void BuildGameGrid()
     {
-        int gridWidth = 15;
-        int gridHeight = 15;
+        Vector2 offset = new(gameWidth - gameGridSizeWidth - gridTileSize, gameHeight - gameGridSizeHeight - gridTileSize);
 
-        int gridSizeWidth = gridWidth * gridTileSize;
-        int gridSizeHeight = gridHeight * gridTileSize;
-
-        Vector2 offset = new(gameWidth - gridSizeWidth - gridTileSize, gameHeight - gridSizeHeight - gridTileSize);
-
-        gameGrid = BuildGrid(gridWidth, gridHeight, offset, contentLoader.Grasses);
+        gameGrid = BuildGrid(gameGridWidth, gameGridHeight, offset, contentLoader.Grasses);
     }
 
     private void DrawGame()
     {
+        spriteBatch.Draw(contentLoader.TopPanel, new Vector2(gridTileSize, 10), Color.White);
+        spriteBatch.Draw(contentLoader.SidePanel, new Vector2(gridTileSize, gameHeight - gameGridSizeHeight - gridTileSize), Color.White);
+
         DrawGrid(gameGrid);
     }
 
