@@ -4,10 +4,22 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace PowerPlants.Core.Render;
 
-public class RenderManager(Game game, GraphicsDeviceManager graphicsDeviceManager, int targetWidth, int targetHeight)
+public class RenderManager(Game game, GraphicsDeviceManager graphicsDeviceManager)
 {
-    private readonly RenderTarget2D renderTarget = new(graphicsDeviceManager.GraphicsDevice, targetWidth, targetHeight);
+    private static readonly int _gameWidth = 800;
+    private static readonly int _gameHeight = 600;
+    private readonly RenderTarget2D renderTarget = new(graphicsDeviceManager.GraphicsDevice, _gameWidth, _gameHeight);
     private Rectangle destinationRectangle;
+
+    public static int GameWidth
+    {
+        get => _gameWidth;
+    }
+
+    public static int GameHeight
+    {
+        get => _gameHeight;
+    }
 
     private void SetDestinationRectangle()
     {
@@ -52,8 +64,8 @@ public class RenderManager(Game game, GraphicsDeviceManager graphicsDeviceManage
         }
         else
         {
-            graphicsDeviceManager.PreferredBackBufferWidth = targetWidth;
-            graphicsDeviceManager.PreferredBackBufferHeight = targetHeight;
+            graphicsDeviceManager.PreferredBackBufferWidth = _gameWidth;
+            graphicsDeviceManager.PreferredBackBufferHeight = _gameHeight;
             game.Window.IsBorderless = false;
         }
 

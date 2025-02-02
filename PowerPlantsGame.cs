@@ -18,9 +18,6 @@ public class PowerPlantsGame : Game
     private ContentLoader contentLoader;
     private ContentDrawer contentDrawer;
 
-    private static readonly int gameWidth = 800;
-    private static readonly int gameHeight = 600;
-
     public PowerPlantsGame()
     {
         graphicsDeviceManager = new GraphicsDeviceManager(this);
@@ -29,7 +26,7 @@ public class PowerPlantsGame : Game
 
     protected override void Initialize()
     {
-        renderManager = new(this, graphicsDeviceManager, gameWidth, gameHeight);
+        renderManager = new(this, graphicsDeviceManager);
         stateManager = new(this, renderManager);
         inputManager = new(this, stateManager);
 
@@ -42,10 +39,9 @@ public class PowerPlantsGame : Game
     {
         spriteBatch = new SpriteBatch(GraphicsDevice);
         contentLoader = new ContentLoader(Content);
-        contentDrawer = new(spriteBatch, stateManager, contentLoader, gameWidth, gameHeight);
+        contentDrawer = new(spriteBatch, stateManager, contentLoader);
 
         contentLoader.LoadContent();
-        contentDrawer.Load();
         stateManager.PrepareContent(contentLoader);
     }
 

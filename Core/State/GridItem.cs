@@ -1,7 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace PowerPlants.Core.Content;
+namespace PowerPlants.Core.State;
 
 public class GridItem(Vector2 position, Texture2D texture)
 {
@@ -17,6 +17,6 @@ public class GridItem(Vector2 position, Texture2D texture)
 
     public Rectangle Rectangle
     {
-        get => new(new Point((int)position.X, (int)position.Y), new Point(ContentDrawer.GridTileSize));
+        get => new(new Point((int)position.X, (int)position.Y), new Point(StateManager.GridTileSize));
     }
 }
