@@ -26,7 +26,7 @@ public class RenderManager(Game game, GraphicsDeviceManager graphicsDeviceManage
         destinationRectangle = new(posX, posY, newWidth, newHeight);
     }
 
-    public void Activate()
+    public void Load()
     {
         graphicsDeviceManager.GraphicsDevice.SetRenderTarget(renderTarget);
         graphicsDeviceManager.GraphicsDevice.Clear(Color.CornflowerBlue);

@@ -18,8 +18,8 @@ public class Game1 : Game
     private ContentLoader contentLoader;
     private ContentDrawer contentDrawer;
 
-    private static readonly int gameWidth = 1920;
-    private static readonly int gameHeight = 1080;
+    private static readonly int gameWidth = 800;
+    private static readonly int gameHeight = 600;
 
     public Game1()
     {
@@ -42,9 +42,10 @@ public class Game1 : Game
     {
         spriteBatch = new SpriteBatch(GraphicsDevice);
         contentLoader = new ContentLoader(Content);
-        contentDrawer = new(spriteBatch, stateManager, contentLoader, gameWidth);
+        contentDrawer = new(spriteBatch, stateManager, contentLoader, gameWidth, gameHeight);
 
         contentLoader.LoadContent();
+        contentDrawer.Load();
     }
 
     protected override void Update(GameTime gameTime)
@@ -57,7 +58,7 @@ public class Game1 : Game
 
     protected override void Draw(GameTime gameTime)
     {
-        renderManager.Activate();
+        renderManager.Load();
 
         contentDrawer.Draw();
 
