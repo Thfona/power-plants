@@ -66,9 +66,11 @@ public class ContentDrawer(SpriteBatch spriteBatch, StateManager stateManager, C
 
     private void DrawGame()
     {
+        int gridTileSize = StateManager.GridTileSize;
+
         // Panels
-        Vector2 topPanelPosition = new(StateManager.GridTileSize, 10);
-        Vector2 sidePanelPosition = new(StateManager.GridTileSize, RenderManager.GameHeight - StateManager.GameGridSizeHeight - StateManager.GridTileSize);
+        Vector2 topPanelPosition = new(gridTileSize, 10);
+        Vector2 sidePanelPosition = new(gridTileSize, RenderManager.GameHeight - StateManager.GameGridSizeHeight - gridTileSize);
 
         spriteBatch.Draw(contentLoader.TopPanel, topPanelPosition, Color.White);
         spriteBatch.Draw(contentLoader.SidePanel, sidePanelPosition, Color.White);
@@ -89,6 +91,19 @@ public class ContentDrawer(SpriteBatch spriteBatch, StateManager stateManager, C
 
         // Grid
         DrawGrid(stateManager.GameGrid);
+
+        // Cursor
+        if (stateManager.SelectedPowerPlant != null)
+        {
+            Vector2 mousePosition = StateManager.GetMousePosition();
+
+            spriteBatch.Draw(
+                stateManager.SelectedPowerPlant.Texture,
+                new Vector2(mousePosition.X - (gridTileSize / 2),
+                mousePosition.Y - (gridTileSize / 2)),
+                Color.White
+            );
+        }
     }
 
     public void Draw()
