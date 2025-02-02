@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Input;
-using PowerPlant.Core.Input.Enums;
+using PowerPlants.Core.Input.Enums;
 
-namespace PowerPlant.Core.Input;
+namespace PowerPlants.Core.Input;
 
 internal class Input(
     InputActions action,

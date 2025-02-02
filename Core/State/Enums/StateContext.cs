@@ -1,4 +1,4 @@
-namespace PowerPlant.Core.State.Enums;
+namespace PowerPlants.Core.State.Enums;
 
 internal enum StateContext
 {

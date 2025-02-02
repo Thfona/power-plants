@@ -1,10 +1,10 @@
 using System.Linq;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Input;
-using PowerPlant.Core.Input.Enums;
-using PowerPlant.Core.Input.Interfaces;
+using PowerPlants.Core.Input.Enums;
+using PowerPlants.Core.Input.Interfaces;
 
-namespace PowerPlant.Core.Input.Handlers;
+namespace PowerPlants.Core.Input.Handlers;
 
 internal class MouseInputHandler : IInputActionHandler
 {

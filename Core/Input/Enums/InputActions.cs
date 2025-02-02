@@ -1,8 +1,10 @@
-namespace PowerPlant.Core.Input.Enums;
+namespace PowerPlants.Core.Input.Enums;
 
 internal enum InputActions
 {
     StartGame,
     ExitGame,
     SetFullScreen,
+    LeftClick,
+    RightClick,
 }

@@ -1,2 +1,2 @@
-﻿using var game = new PowerPlant.Game1();
+﻿using var game = new PowerPlants.Game1();
 game.Run();

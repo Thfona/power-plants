@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace PowerPlant.Core.Content;
+namespace PowerPlants.Core.Content;
 
 public class ContentLoader(ContentManager contentManager)
 {
@@ -12,10 +12,11 @@ public class ContentLoader(ContentManager contentManager)
     private SoundEffect _startSfx;
     private SoundEffect _pickSfx;
     private SoundEffect _failSfx;
-    private SoundEffect _powerPlantThemeSong;
+    private SoundEffect _powerPlantsThemeSong;
     private Texture2D _topPanel;
     private Texture2D _sidePanel;
     private Texture2D _solarPlant;
+    private Texture2D _windPlant;
     private Texture2D _naturalGasPlant;
     private Texture2D _nuclearPlant;
     private Texture2D grass1;
@@ -55,9 +56,9 @@ public class ContentLoader(ContentManager contentManager)
         get => _failSfx;
     }
 
-    public SoundEffect PowerPlantThemeSong
+    public SoundEffect PowerPlantsThemeSong
     {
-        get => _powerPlantThemeSong;
+        get => _powerPlantsThemeSong;
     }
 
     public Texture2D TopPanel
@@ -71,6 +72,11 @@ public class ContentLoader(ContentManager contentManager)
     }
 
     public Texture2D SolarPlant
+    {
+        get => _solarPlant;
+    }
+
+    public Texture2D WindPlant
     {
         get => _solarPlant;
     }
@@ -99,11 +105,12 @@ public class ContentLoader(ContentManager contentManager)
         _pickSfx = contentManager.Load<SoundEffect>("audio/pick");
         _failSfx = contentManager.Load<SoundEffect>("audio/fail");
 
-        _powerPlantThemeSong = contentManager.Load<SoundEffect>("audio/powerplant");
+        _powerPlantsThemeSong = contentManager.Load<SoundEffect>("audio/powerPlants");
 
         _topPanel = contentManager.Load<Texture2D>("textures/topPanel");
         _sidePanel = contentManager.Load<Texture2D>("textures/sidePanel");
         _solarPlant = contentManager.Load<Texture2D>("textures/solarPlant");
+        _windPlant = contentManager.Load<Texture2D>("textures/windPlant");
         _naturalGasPlant = contentManager.Load<Texture2D>("textures/naturalGasPlant");
         _nuclearPlant = contentManager.Load<Texture2D>("textures/nuclearPlant");
         grass1 = contentManager.Load<Texture2D>("textures/grass1");

@@ -1,21 +1,21 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using PowerPlant.Core.Content;
-using PowerPlant.Core.Render;
-using PowerPlant.Core.State.Enums;
+using PowerPlants.Core.Content;
+using PowerPlants.Core.Render;
+using PowerPlants.Core.State.Enums;
 
-namespace PowerPlant.Core.State;
+namespace PowerPlants.Core.State;
 
 public class StateManager(Game game, RenderManager renderManager)
 {
     private ContentLoader contentLoader;
     private StateContext stateContext = StateContext.Menu;
     private bool _isFullScreen = false;
-
-    public bool IsFullScreen
-    {
-        get => _isFullScreen;
-    }
+    private static readonly int energyGenerationInterval = 5;
+    private double energyGenerationTimer = energyGenerationInterval;
+    private double _energyOutput = 0;
+    private static readonly int moneyMultiplier = 5;
+    private double _money = 100;
 
     public bool IsInMenu
     {
@@ -27,6 +27,21 @@ public class StateManager(Game game, RenderManager renderManager)
         get => stateContext == StateContext.Game;
     }
 
+    public bool IsFullScreen
+    {
+        get => _isFullScreen;
+    }
+
+    public double EnergyOutput
+    {
+        get => _energyOutput;
+    }
+
+    public double Money
+    {
+        get => _money;
+    }
+
     public void Initialize()
     {
         game.IsMouseVisible = true;
@@ -35,13 +50,23 @@ public class StateManager(Game game, RenderManager renderManager)
 
     public void Update(GameTime gameTime)
     {
-        // TODO: Add update logic
+        if (IsInGame)
+        {
+            energyGenerationTimer -= gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (energyGenerationTimer <= 0)
+            {
+                _money += _energyOutput * moneyMultiplier;
+
+                energyGenerationTimer = energyGenerationInterval;
+            }
+        }
     }
 
     public void PrepareContent(ContentLoader contentLoader)
     {
         this.contentLoader = contentLoader;
-        AudioPlayer.PlayMusic(this.contentLoader.PowerPlantThemeSong, true);
+        AudioPlayer.PlayMusic(this.contentLoader.PowerPlantsThemeSong, true);
     }
 
     public void ToggleFullScreen()

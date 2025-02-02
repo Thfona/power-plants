@@ -2,7 +2,7 @@ using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace PowerPlant.Core.Render;
+namespace PowerPlants.Core.Render;
 
 public class RenderManager(Game game, GraphicsDeviceManager graphicsDeviceManager, int targetWidth, int targetHeight)
 {

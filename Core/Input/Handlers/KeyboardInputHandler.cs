@@ -1,8 +1,8 @@
 using System.Linq;
 using Microsoft.Xna.Framework.Input;
-using PowerPlant.Core.Input.Interfaces;
+using PowerPlants.Core.Input.Interfaces;
 
-namespace PowerPlant.Core.Input.Handlers;
+namespace PowerPlants.Core.Input.Handlers;
 
 internal class KeyboardInputHandler : IInputActionHandler
 {

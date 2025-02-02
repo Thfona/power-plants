@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using PowerPlant.Core.State;
+using PowerPlants.Core.State;
 
-namespace PowerPlant.Core.Content;
+namespace PowerPlants.Core.Content;
 
 public class ContentDrawer(
     SpriteBatch spriteBatch,
@@ -23,7 +23,18 @@ public class ContentDrawer(
     private static readonly int gameGridSizeWidth = gameGridWidth * gridTileSize;
     private static readonly int gameGridSizeHeight = gameGridHeight * gridTileSize;
     private List<GridItem> menuGrid;
-    private List<GridItem> gameGrid;
+    private List<GridItem> _gameGrid;
+
+    public static int GridTileSize
+    {
+        get => gridTileSize;
+    }
+
+    public List<GridItem> GameGrid
+    {
+        get => _gameGrid;
+        set => _gameGrid = value;
+    }
 
     private void DrawStringWithOutline(SpriteFont spriteFont, string text, Vector2 position, Color color)
     {
@@ -82,40 +93,61 @@ public class ContentDrawer(
         menuGrid = BuildGrid(menuGridWidth, menuGridHeight, offset, textureOptions);
     }
 
+    private void BuildGameGrid()
+    {
+        Vector2 offset = new(gameWidth - gameGridSizeWidth - gridTileSize, gameHeight - gameGridSizeHeight - gridTileSize);
+
+        _gameGrid = BuildGrid(gameGridWidth, gameGridHeight, offset, contentLoader.Grasses);
+    }
+
     private void DrawMenu()
     {
+        // Grid
         DrawGrid(menuGrid);
 
-        string title = "Power Plant";
+        // Title
+        string title = "Power Plants";
         Vector2 titleTextSize = contentLoader.BigFont.MeasureString(title);
         DrawStringWithOutline(contentLoader.BigFont, title, new Vector2((gameWidth / 2) - (titleTextSize.X / 2), 150), Color.White);
 
+        // Play
         string startGameMessage = "Press [Enter] to play";
         Vector2 startGameTextSize = contentLoader.SmallFont.MeasureString(startGameMessage);
         DrawStringWithOutline(contentLoader.SmallFont, startGameMessage, new Vector2((gameWidth / 2) - (startGameTextSize.X / 2), 350), Color.White);
 
+        // Fullscreen
         string fullScreenMessage = "Press [F] to toggle fullscreen";
         Vector2 fullScreenTextSize = contentLoader.SmallFont.MeasureString(fullScreenMessage);
         DrawStringWithOutline(contentLoader.SmallFont, fullScreenMessage, new Vector2((gameWidth / 2) - (fullScreenTextSize.X / 2), 400), Color.White);
 
+        // Quit
         string exitGameMessage = "Press [Esc] to quit";
         Vector2 exitGameTextSize = contentLoader.SmallFont.MeasureString(exitGameMessage);
         DrawStringWithOutline(contentLoader.SmallFont, exitGameMessage, new Vector2((gameWidth / 2) - (exitGameTextSize.X / 2), 450), Color.White);
     }
 
-    private void BuildGameGrid()
-    {
-        Vector2 offset = new(gameWidth - gameGridSizeWidth - gridTileSize, gameHeight - gameGridSizeHeight - gridTileSize);
-
-        gameGrid = BuildGrid(gameGridWidth, gameGridHeight, offset, contentLoader.Grasses);
-    }
-
     private void DrawGame()
     {
-        spriteBatch.Draw(contentLoader.TopPanel, new Vector2(gridTileSize, 10), Color.White);
-        spriteBatch.Draw(contentLoader.SidePanel, new Vector2(gridTileSize, gameHeight - gameGridSizeHeight - gridTileSize), Color.White);
+        // Panels
+        Vector2 topPanelPosition = new(gridTileSize, 10);
+        Vector2 sidePanelPosition = new(gridTileSize, gameHeight - gameGridSizeHeight - gridTileSize);
 
-        DrawGrid(gameGrid);
+        spriteBatch.Draw(contentLoader.TopPanel, topPanelPosition, Color.White);
+        spriteBatch.Draw(contentLoader.SidePanel, sidePanelPosition, Color.White);
+
+        // Top panel content
+        string moneyText = "Money: " + stateManager.Money;
+        spriteBatch.DrawString(contentLoader.SmallFont, moneyText, new Vector2(50, 28), Color.White);
+
+        string energyOutputText = "Energy: " + stateManager.EnergyOutput;
+        Vector2 energyOutputTextSize = contentLoader.SmallFont.MeasureString(energyOutputText);
+        spriteBatch.DrawString(contentLoader.SmallFont, energyOutputText, new Vector2(gameWidth - energyOutputTextSize.X - 48, 28), Color.White);
+
+        // Side panel content
+        // TODO
+
+        // Grid
+        DrawGrid(_gameGrid);
     }
 
     public void Load()

@@ -1,9 +1,9 @@
 using Microsoft.Xna.Framework;
-using PowerPlant.Core.Input.Enums;
-using PowerPlant.Core.Input.Handlers;
-using PowerPlant.Core.State;
+using PowerPlants.Core.Input.Enums;
+using PowerPlants.Core.Input.Handlers;
+using PowerPlants.Core.State;
 
-namespace PowerPlant.Core.Input;
+namespace PowerPlants.Core.Input;
 
 public class InputManager(Game game, StateManager stateManager)
 {
@@ -14,5 +14,7 @@ public class InputManager(Game game, StateManager stateManager)
         inputHandler.HandleInput(InputActions.StartGame, stateManager.StartGame);
         inputHandler.HandleInput(InputActions.ExitGame, game.Exit);
         inputHandler.HandleInput(InputActions.SetFullScreen, stateManager.ToggleFullScreen);
+        inputHandler.HandleInput(InputActions.LeftClick, stateManager.ToggleFullScreen);
+        inputHandler.HandleInput(InputActions.RightClick, stateManager.ToggleFullScreen);
     }
 }

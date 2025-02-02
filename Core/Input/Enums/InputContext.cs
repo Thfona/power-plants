@@ -1,4 +1,4 @@
-namespace PowerPlant.Core.Input.Enums;
+namespace PowerPlants.Core.Input.Enums;
 
 internal enum InputContext
 {

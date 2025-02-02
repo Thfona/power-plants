@@ -1,4 +1,4 @@
-namespace PowerPlant.Core.Input.Interfaces;
+namespace PowerPlants.Core.Input.Interfaces;
 
 internal interface IInputActionHandler
 {

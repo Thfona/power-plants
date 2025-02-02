@@ -25,11 +25,11 @@
 /processorParam:Quality=Best
 /build:audio/pick.wav
 
-#begin audio/powerplant.wav
+#begin audio/powerPlants.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:audio/powerplant.wav
+/build:audio/powerPlants.wav
 
 #begin audio/start.wav
 /importer:WavImporter
@@ -230,4 +230,16 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:textures/topPanel.png
+
+#begin textures/windPlant.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:textures/windPlant.png
 

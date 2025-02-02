@@ -1,3 +1,3 @@
-# PowerPlant
+# Power Plants
 
 MonoGame project.

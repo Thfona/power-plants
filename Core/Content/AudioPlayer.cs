@@ -1,6 +1,6 @@
 using Microsoft.Xna.Framework.Audio;
 
-namespace PowerPlant.Core.Content;
+namespace PowerPlants.Core.Content;
 
 public class AudioPlayer
 {

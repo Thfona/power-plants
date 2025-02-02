@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Input;
-using PowerPlant.Core.Input.Enums;
-using PowerPlant.Core.State;
+using PowerPlants.Core.Input.Enums;
+using PowerPlants.Core.State;
 
-namespace PowerPlant.Core.Input.Handlers;
+namespace PowerPlants.Core.Input.Handlers;
 
 internal class InputHandler(StateManager stateManager)
 {
@@ -16,6 +16,8 @@ internal class InputHandler(StateManager stateManager)
         new Input(InputActions.StartGame, InputBehaviors.Press, InputContext.Menu, [], [Keys.Enter], []),
         new Input(InputActions.ExitGame, InputBehaviors.Press, InputContext.Global, [], [Keys.Escape], []),
         new Input(InputActions.SetFullScreen, InputBehaviors.Press, InputContext.Global, [], [Keys.F], []),
+        new Input(InputActions.LeftClick, InputBehaviors.Press, InputContext.Game, [MouseButtons.LeftButton], [], []),
+        new Input(InputActions.RightClick, InputBehaviors.Press, InputContext.Game, [MouseButtons.RightButton], [], []),
     ];
 
     private void ReleaseAction(InputActions inputAction)

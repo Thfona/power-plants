@@ -1,11 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using PowerPlant.Core.Content;
-using PowerPlant.Core.Input;
-using PowerPlant.Core.Render;
-using PowerPlant.Core.State;
+using PowerPlants.Core.Content;
+using PowerPlants.Core.Input;
+using PowerPlants.Core.Render;
+using PowerPlants.Core.State;
 
-namespace PowerPlant;
+namespace PowerPlants;
 
 public class Game1 : Game
 {
