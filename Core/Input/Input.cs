@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Input;
-using JumpBot.Core.Input.Enums;
+using PowerPlant.Core.Input.Enums;
 
-namespace JumpBot.Core.Input;
+namespace PowerPlant.Core.Input;
 
 internal class Input(
     InputActions action,

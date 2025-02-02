@@ -1,9 +1,9 @@
 using Microsoft.Xna.Framework;
-using JumpBot.Core.Input.Enums;
-using JumpBot.Core.Input.Handlers;
-using JumpBot.Core.State;
+using PowerPlant.Core.Input.Enums;
+using PowerPlant.Core.Input.Handlers;
+using PowerPlant.Core.State;
 
-namespace JumpBot.Core.Input;
+namespace PowerPlant.Core.Input;
 
 public class InputManager(Game game, StateManager stateManager)
 {

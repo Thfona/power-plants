@@ -1,2 +1,2 @@
-﻿using var game = new JumpBot.Game1();
+﻿using var game = new PowerPlant.Game1();
 game.Run();

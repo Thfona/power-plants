@@ -1,4 +1,4 @@
-namespace JumpBot.Core.Input.Enums;
+namespace PowerPlant.Core.Input.Enums;
 
 internal enum InputContext
 {

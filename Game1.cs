@@ -1,11 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using JumpBot.Core.Content;
-using JumpBot.Core.Input;
-using JumpBot.Core.Render;
-using JumpBot.Core.State;
+using PowerPlant.Core.Content;
+using PowerPlant.Core.Input;
+using PowerPlant.Core.Render;
+using PowerPlant.Core.State;
 
-namespace JumpBot;
+namespace PowerPlant;
 
 public class Game1 : Game
 {

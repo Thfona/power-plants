@@ -1,8 +1,8 @@
 using System.Linq;
 using Microsoft.Xna.Framework.Input;
-using JumpBot.Core.Input.Interfaces;
+using PowerPlant.Core.Input.Interfaces;
 
-namespace JumpBot.Core.Input.Handlers;
+namespace PowerPlant.Core.Input.Handlers;
 
 internal class KeyboardInputHandler : IInputActionHandler
 {

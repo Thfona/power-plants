@@ -2,7 +2,7 @@ using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace JumpBot.Core.Render;
+namespace PowerPlant.Core.Render;
 
 public class RenderManager(Game game, GraphicsDeviceManager graphicsDeviceManager, int targetWidth, int targetHeight)
 {

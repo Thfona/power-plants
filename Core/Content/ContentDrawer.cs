@@ -1,8 +1,8 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using JumpBot.Core.State;
+using PowerPlant.Core.State;
 
-namespace JumpBot.Core.Content;
+namespace PowerPlant.Core.Content;
 
 public class ContentDrawer(
     SpriteBatch spriteBatch,
@@ -13,17 +13,26 @@ public class ContentDrawer(
 {
     private void DrawMenu()
     {
-        string startGameMessage = "Press [Enter] or (A) to begin.";
-        Vector2 startGameTextSize = contentLoader.BigFont.MeasureString(startGameMessage);
-        spriteBatch.DrawString(contentLoader.BigFont, startGameMessage, new Vector2((gameWidth / 2) - (startGameTextSize.X / 2), 200), Color.White);
+        string title = "Power Plant";
+        Vector2 titleTextSize = contentLoader.BigFont.MeasureString(title);
+        spriteBatch.DrawString(contentLoader.BigFont, title, new Vector2((gameWidth / 2) - (titleTextSize.X / 2), 100), Color.White);
 
-        string exitGameMessage = "Press [Esc] or (Back) to quit.";
+        string startGameMessage = "Press [Enter] to begin";
+        Vector2 startGameTextSize = contentLoader.SmallFont.MeasureString(startGameMessage);
+        spriteBatch.DrawString(contentLoader.SmallFont, startGameMessage, new Vector2((gameWidth / 2) - (startGameTextSize.X / 2), 700), Color.White);
+
+        string exitGameMessage = "Press [Esc] to quit";
         Vector2 exitGameTextSize = contentLoader.SmallFont.MeasureString(exitGameMessage);
-        spriteBatch.DrawString(contentLoader.SmallFont, exitGameMessage, new Vector2((gameWidth / 2) - (exitGameTextSize.X / 2), 300), Color.White);
+        spriteBatch.DrawString(contentLoader.SmallFont, exitGameMessage, new Vector2((gameWidth / 2) - (exitGameTextSize.X / 2), 750), Color.White);
 
-        string fullScreenMessage = "Press [F] or (Start) to toggle fullscreen.";
+        string fullScreenMessage = "Press [F] to toggle fullscreen";
         Vector2 fullScreenTextSize = contentLoader.SmallFont.MeasureString(fullScreenMessage);
-        spriteBatch.DrawString(contentLoader.SmallFont, fullScreenMessage, new Vector2((gameWidth / 2) - (fullScreenTextSize.X / 2), 400), Color.White);
+        spriteBatch.DrawString(contentLoader.SmallFont, fullScreenMessage, new Vector2((gameWidth / 2) - (fullScreenTextSize.X / 2), 800), Color.White);
+    }
+
+    private void DrawGame()
+    {
+        // TODO: Game content
     }
 
     public void Draw()
@@ -33,6 +42,11 @@ public class ContentDrawer(
         if (stateManager.IsInMenu)
         {
             DrawMenu();
+        }
+
+        if (stateManager.IsInGame)
+        {
+            DrawGame();
         }
 
         spriteBatch.End();

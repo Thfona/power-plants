@@ -1,3 +1,3 @@
-# JumpBot
+# PowerPlant
 
 MonoGame project.

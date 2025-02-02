@@ -1,4 +1,4 @@
-namespace JumpBot.Core.Input.Interfaces;
+namespace PowerPlant.Core.Input.Interfaces;
 
 internal interface IInputActionHandler
 {

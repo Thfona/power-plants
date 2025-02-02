@@ -1,4 +1,4 @@
-namespace JumpBot.Core.State.Enums;
+namespace PowerPlant.Core.State.Enums;
 
 internal enum StateContext
 {

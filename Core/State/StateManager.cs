@@ -1,8 +1,8 @@
 using Microsoft.Xna.Framework;
-using JumpBot.Core.State.Enums;
-using JumpBot.Core.Render;
+using PowerPlant.Core.State.Enums;
+using PowerPlant.Core.Render;
 
-namespace JumpBot.Core.State;
+namespace PowerPlant.Core.State;
 
 public class StateManager(Game game, RenderManager renderManager)
 {
@@ -26,7 +26,7 @@ public class StateManager(Game game, RenderManager renderManager)
 
     public void Initialize()
     {
-        game.IsMouseVisible = false;
+        game.IsMouseVisible = true;
         renderManager.SetFullScreen(_isFullScreen);
     }
 
