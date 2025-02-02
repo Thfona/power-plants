@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using PowerPlant.Core.State.Enums;
 using PowerPlant.Core.Render;
 
@@ -49,5 +50,12 @@ public class StateManager(Game game, RenderManager renderManager)
     public void SetToInMenuContext()
     {
         stateContext = StateContext.Menu;
+    }
+
+    public static Vector2 GetMousePosition()
+    {
+        MouseState mouseState = Mouse.GetState();
+
+        return mouseState.Position.ToVector2();
     }
 }
