@@ -7,7 +7,7 @@ using PowerPlants.Core.State;
 
 namespace PowerPlants;
 
-public class Game1 : Game
+public class PowerPlantsGame : Game
 {
     private readonly GraphicsDeviceManager graphicsDeviceManager;
     private SpriteBatch spriteBatch;
@@ -21,7 +21,7 @@ public class Game1 : Game
     private static readonly int gameWidth = 800;
     private static readonly int gameHeight = 600;
 
-    public Game1()
+    public PowerPlantsGame()
     {
         graphicsDeviceManager = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
