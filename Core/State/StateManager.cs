@@ -42,12 +42,12 @@ public class StateManager(Game game, RenderManager renderManager)
         _isFullScreen = !_isFullScreen;
     }
 
-    public void SetToInGameContext()
+    public void StartGame()
     {
         stateContext = StateContext.Game;
     }
 
-    public void SetToInMenuContext()
+    public void EndGame()
     {
         stateContext = StateContext.Menu;
     }

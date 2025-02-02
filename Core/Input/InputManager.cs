@@ -11,7 +11,7 @@ public class InputManager(Game game, StateManager stateManager)
 
     public void Update()
     {
-        inputHandler.HandleInput(InputActions.StartGame, stateManager.SetToInGameContext);
+        inputHandler.HandleInput(InputActions.StartGame, stateManager.StartGame);
         inputHandler.HandleInput(InputActions.ExitGame, game.Exit);
         inputHandler.HandleInput(InputActions.SetFullScreen, stateManager.ToggleFullScreen);
     }

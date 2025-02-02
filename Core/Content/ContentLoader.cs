@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 
 namespace PowerPlant.Core.Content;
 
@@ -8,6 +10,10 @@ public class ContentLoader(ContentManager contentManager)
 {
     private SpriteFont _bigFont;
     private SpriteFont _smallFont;
+    private SoundEffect _startSfx;
+    private SoundEffect _pickSfx;
+    private SoundEffect _failSfx;
+    private Song _powerPlantThemeSong;
     private Texture2D grass1;
     private Texture2D grass2;
     private Texture2D grass3;
@@ -30,6 +36,26 @@ public class ContentLoader(ContentManager contentManager)
         get => _smallFont;
     }
 
+    public SoundEffect StartSfx
+    {
+        get => _startSfx;
+    }
+
+    public SoundEffect PickSfx
+    {
+        get => _pickSfx;
+    }
+
+    public SoundEffect FailSfx
+    {
+        get => _failSfx;
+    }
+
+    public Song PowerPlantThemeSong
+    {
+        get => _powerPlantThemeSong;
+    }
+
     public List<Texture2D> Grasses
     {
         get => _grasses;
@@ -37,18 +63,25 @@ public class ContentLoader(ContentManager contentManager)
 
     public void LoadContent()
     {
-        _bigFont = contentManager.Load<SpriteFont>("bigFont");
-        _smallFont = contentManager.Load<SpriteFont>("smallFont");
-        grass1 = contentManager.Load<Texture2D>("grass1");
-        grass2 = contentManager.Load<Texture2D>("grass2");
-        grass3 = contentManager.Load<Texture2D>("grass3");
-        grass4 = contentManager.Load<Texture2D>("grass4");
-        grass5 = contentManager.Load<Texture2D>("grass5");
-        grass6 = contentManager.Load<Texture2D>("grass6");
-        grass7 = contentManager.Load<Texture2D>("grass7");
-        grass8 = contentManager.Load<Texture2D>("grass8");
-        grass9 = contentManager.Load<Texture2D>("grass9");
-        grass10 = contentManager.Load<Texture2D>("grass10");
+        _bigFont = contentManager.Load<SpriteFont>("fonts/bigFont");
+        _smallFont = contentManager.Load<SpriteFont>("fonts/smallFont");
+
+        _startSfx = contentManager.Load<SoundEffect>("audio/start");
+        _pickSfx = contentManager.Load<SoundEffect>("audio/pick");
+        _failSfx = contentManager.Load<SoundEffect>("audio/fail");
+
+        _powerPlantThemeSong = contentManager.Load<Song>("audio/powerplant");
+
+        grass1 = contentManager.Load<Texture2D>("textures/grass1");
+        grass2 = contentManager.Load<Texture2D>("textures/grass2");
+        grass3 = contentManager.Load<Texture2D>("textures/grass3");
+        grass4 = contentManager.Load<Texture2D>("textures/grass4");
+        grass5 = contentManager.Load<Texture2D>("textures/grass5");
+        grass6 = contentManager.Load<Texture2D>("textures/grass6");
+        grass7 = contentManager.Load<Texture2D>("textures/grass7");
+        grass8 = contentManager.Load<Texture2D>("textures/grass8");
+        grass9 = contentManager.Load<Texture2D>("textures/grass9");
+        grass10 = contentManager.Load<Texture2D>("textures/grass10");
         _grasses = [
             grass1,
             grass2,
