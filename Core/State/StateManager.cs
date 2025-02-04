@@ -188,11 +188,18 @@ public class StateManager(Game game, RenderManager renderManager)
         stateContext = StateContext.Menu;
     }
 
-    public static Vector2 GetMousePosition()
+    public Vector2 GetMousePosition()
     {
         MouseState mouseState = Mouse.GetState();
 
-        return mouseState.Position.ToVector2();
+        Vector2 mousePosition = mouseState.Position.ToVector2();
+
+        float translatedX = (mousePosition.X - renderManager.DestinationRectangle.X) / renderManager.GameScale.X;
+        float translatedY = (mousePosition.Y - renderManager.DestinationRectangle.Y) / renderManager.GameScale.Y;
+
+        Vector2 translatedPosition = new(translatedX, translatedY);
+
+        return translatedPosition;
     }
 
     public void HandleLeftMouseClick()

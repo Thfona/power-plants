@@ -9,7 +9,7 @@ public class RenderManager(Game game, GraphicsDeviceManager graphicsDeviceManage
     private static readonly int _gameWidth = 800;
     private static readonly int _gameHeight = 600;
     private readonly RenderTarget2D renderTarget = new(graphicsDeviceManager.GraphicsDevice, _gameWidth, _gameHeight);
-    private Rectangle destinationRectangle;
+    private Rectangle _destinationRectangle;
 
     public static int GameWidth
     {
@@ -19,6 +19,16 @@ public class RenderManager(Game game, GraphicsDeviceManager graphicsDeviceManage
     public static int GameHeight
     {
         get => _gameHeight;
+    }
+
+    public Rectangle DestinationRectangle
+    {
+        get => _destinationRectangle;
+    }
+
+    public Vector2 GameScale
+    {
+        get => new((float)_destinationRectangle.Width / _gameWidth, (float)_destinationRectangle.Height / _gameHeight);
     }
 
     private void SetDestinationRectangle()
@@ -35,7 +45,7 @@ public class RenderManager(Game game, GraphicsDeviceManager graphicsDeviceManage
         int posX = (screenSize.Width - newWidth) / 2;
         int posY = (screenSize.Height - newHeight) / 2;
 
-        destinationRectangle = new(posX, posY, newWidth, newHeight);
+        _destinationRectangle = new(posX, posY, newWidth, newHeight);
     }
 
     public void Load()
@@ -50,7 +60,7 @@ public class RenderManager(Game game, GraphicsDeviceManager graphicsDeviceManage
         graphicsDeviceManager.GraphicsDevice.Clear(Color.Black);
 
         spriteBatch.Begin();
-        spriteBatch.Draw(renderTarget, destinationRectangle, Color.White);
+        spriteBatch.Draw(renderTarget, _destinationRectangle, Color.White);
         spriteBatch.End();
     }
 

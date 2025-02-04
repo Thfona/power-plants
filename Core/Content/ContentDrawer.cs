@@ -92,7 +92,7 @@ public class ContentDrawer(SpriteBatch spriteBatch, StateManager stateManager, C
         // Cursor
         if (stateManager.SelectedPowerPlant != null)
         {
-            Vector2 mousePosition = StateManager.GetMousePosition();
+            Vector2 mousePosition = stateManager.GetMousePosition();
 
             spriteBatch.Draw(
                 stateManager.SelectedPowerPlant.Texture,
