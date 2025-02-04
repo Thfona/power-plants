@@ -212,14 +212,22 @@ public class StateManager(Game game, RenderManager renderManager)
 
             if (hasClickedSidePanelItem)
             {
-                if (powerPlant.Cost <= _money && _selectedPowerPlant == null)
+                if (_selectedPowerPlant != null)
                 {
-                    _selectedPowerPlant = powerPlant;
-                    _money -= powerPlant.Cost;
+                    _money += _selectedPowerPlant.Cost;
+                    _selectedPowerPlant = null;
 
                     AudioPlayer.PlaySoundEffect(contentLoader.PickSfx);
                 } else {
-                    AudioPlayer.PlaySoundEffect(contentLoader.FailSfx);
+                    if (powerPlant.Cost <= _money)
+                    {
+                        _selectedPowerPlant = powerPlant;
+                        _money -= powerPlant.Cost;
+
+                        AudioPlayer.PlaySoundEffect(contentLoader.PickSfx);
+                    } else {
+                        AudioPlayer.PlaySoundEffect(contentLoader.FailSfx);
+                    }
                 }
             }
         });
@@ -230,7 +238,7 @@ public class StateManager(Game game, RenderManager renderManager)
 
             if (hasClickedGameGridItem)
             {
-                if (_selectedPowerPlant != null)
+                if (_selectedPowerPlant != null && _selectedPowerPlant.EnergyOutput > (item.PowerPlant?.EnergyOutput ?? 0))
                 {
                     if (item.PowerPlant != null)
                     {
