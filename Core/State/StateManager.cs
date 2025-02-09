@@ -238,7 +238,10 @@ public class StateManager(Game game, RenderManager renderManager)
 
             if (hasClickedGameGridItem)
             {
-                if (_selectedPowerPlant != null && _selectedPowerPlant.EnergyOutput > (item.PowerPlant?.EnergyOutput ?? 0))
+                if (
+                    _selectedPowerPlant != null &&
+                    _selectedPowerPlant.EnergyOutput != (item.PowerPlant?.EnergyOutput ?? 0)
+                )
                 {
                     if (item.PowerPlant != null)
                     {
